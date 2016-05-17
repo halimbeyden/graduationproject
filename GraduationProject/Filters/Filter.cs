@@ -33,6 +33,20 @@ namespace GraduationProject
             ColorFiltering cf = new ColorFiltering(new IntRange(150, 255), new IntRange(120, 160), new IntRange(60, 90));
             return cf.Apply(image);
         }
+        public Bitmap DetectJupiter(Bitmap image)
+        {
+            ColorFiltering cf = new ColorFiltering(new IntRange(0,255), new IntRange(76,165), new IntRange(64,154));
+            cf.FillOutsideRange = false;
+            cf.ApplyInPlace(image);
+            BlobCounter bc = new BlobCounter();
+            bc.FilterBlobs = true;
+            bc.MinHeight = 50;
+            bc.MinWidth = 50;
+            bc.ProcessImage(image);
+            Blob[] blobs = bc.GetObjectsInformation();
+            Console.WriteLine(blobs.Count());
+            return image;
+        }
 
         public Bitmap DetectCircle(Bitmap image)
         {
@@ -83,5 +97,7 @@ namespace GraduationProject
         {
             return points.Select(p => new System.Drawing.Point(p.X, p.Y)).ToArray();
         }
+
+
     }
 }

@@ -34,7 +34,7 @@ namespace GraduationProject
         private void processBtn_Click(object sender, EventArgs e)
         {
             //pb2.Image = Filter.SharedInstance.DetectRed(new Bitmap(pb1.Image));
-            pb2.Image = Filter.SharedInstance.DetectCircle(new Bitmap(pb1.Image));
+            pb2.Image = Filter.SharedInstance.DetectJupiter(new Bitmap(pb1.Image));
             pb2.Refresh();
         }
     }
