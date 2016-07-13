@@ -1,36 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GraduationProject.Filters
 {
-    public class AvarageColor
+    public class Features
     {
         /// <summary>
         /// Red
         /// </summary>
-        public float R { get; set; }
+        public float AvarageR { get; set; }
         /// <summary>
         /// Green
         /// </summary>
-        public float G { get; set; }
+        public float AvarageG { get; set; }
         /// <summary>
         /// Blue
         /// </summary>
-        public float B { get; set; }
+        public float AvarageB { get; set; }
         /// <summary>
         /// Hue
         /// </summary>
-        public float H { get; set; }
+        public float AvarageH { get; set; }
         /// <summary>
         /// Saturation
         /// </summary>
-        public float S { get; set; }
+        public float AvarageS { get; set; }
         /// <summary>
         /// Brightness or Lightness
         /// </summary>
-        public float L { get; set; }
+        public float AvarageL { get; set; }
+        public int Size { get; set; }
+
+        public void Save(string name)
+        {
+            File.AppendAllText("./training.txt",AvarageR+";"+AvarageG+";"+AvarageB+";"+AvarageH+";"+AvarageS+";"+AvarageL+";"+Size+";"+name+Environment.NewLine);
+        }
     }
 }

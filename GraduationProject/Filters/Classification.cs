@@ -12,10 +12,10 @@ namespace GraduationProject.Filters
         public Bitmap Image { get; set; }
 
         public Color[,] Matrix { get; set; }
-        private AvarageColor _avarageColor;
-        private bool _avarageColorIsNotSet;
+        private Features _features;
+        private bool _featuresIsNotSet;
 
-        public AvarageColor AvarageColor
+        public Features Features
         {
             get { return getAvarages(); }
         }
@@ -38,7 +38,7 @@ namespace GraduationProject.Filters
             WindowsSize = 20;//px
             MinRGB = 75;//R+G+B
             Image = bm;
-            Matrix = new Color[Image.Width,Image.Height];
+            Matrix = new Color[Image.Width, Image.Height];
             for (int i = 0; i < Image.Width; i++)
             {
                 for (int j = 0; j < Image.Height; j++)
@@ -63,11 +63,11 @@ namespace GraduationProject.Filters
             {
                 for (int j = 0; j < height; j++)
                 {
-                    r = 0;g = 0;b = 0;
+                    r = 0; g = 0; b = 0;
                     int ws = 0;
-                    for (int k = WindowsSize*i; k < WindowsSize*(i+1) && k < Image.Width; k++)
+                    for (int k = WindowsSize * i; k < WindowsSize * (i + 1) && k < Image.Width; k++)
                     {
-                        for (int l = WindowsSize*j; l < WindowsSize*(j+1) && l < Image.Height; l++, ws++)
+                        for (int l = WindowsSize * j; l < WindowsSize * (j + 1) && l < Image.Height; l++, ws++)
                         {
                             Color cPixel = Image.GetPixel(k, l);
                             r += cPixel.R;
@@ -78,7 +78,7 @@ namespace GraduationProject.Filters
                     result[i, j] = (float)r / (ws) + (float)g / (ws) + (float)b / (ws);
                 }
             }
-            return result; 
+            return result;
         }
         private Rectangle getBoundingBox()
         {
@@ -87,48 +87,55 @@ namespace GraduationProject.Filters
             _boundingRectIsNotSet = true;
             List<Point> points = new List<Point>();
 
-            float [,]matrix = getRGBAvarage();
+            float[,] matrix = getRGBAvarage();
 
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if(matrix[i,j] > MinRGB)
-                        points.Add(new Point(Decode(i,Image.Width),Decode(j,Image.Height)));
+                    if (matrix[i, j] > MinRGB)
+                        points.Add(new Point(Decode(i, Image.Width), Decode(j, Image.Height)));
                 }
             }
+            if (points.Count < 1)
+                throw new Exception("There is no planet in the photo");
             _boundingRect = BoundingBox(points);
             return _boundingRect;
         }
-        private AvarageColor getAvarages()
+        private Features getAvarages()
         {
-            if (_avarageColorIsNotSet)
-                return _avarageColor;
-            _avarageColorIsNotSet = true;
+            if (_featuresIsNotSet)
+                return _features;
+            _featuresIsNotSet = true;
             if (_boundingRectIsNotSet)
                 _boundingRect = getBoundingBox();
             float resultR = 0, resultG = 0, resultB = 0, resultH = 0, resultS = 0, resultL = 0;
+            int pointSize = 0;
             for (int i = BoundingRect.Left; i < BoundingRect.Right; i++)
             {
                 for (int j = BoundingRect.Top; j < BoundingRect.Bottom; j++)
                 {
-                    resultR += Image.GetPixel(i,j).R;
-                    resultG += Image.GetPixel(i,j).G;
-                    resultB += Image.GetPixel(i,j).B;
-                    resultH += Image.GetPixel(i,j).GetHue();
-                    resultS += Image.GetPixel(i,j).GetSaturation();
-                    resultL += Image.GetPixel(i,j).GetBrightness();
+                    Color px = Image.GetPixel(i, j);
+                    if (px.R + px.G + px.B < MinRGB)
+                        continue;
+                    resultR += px.R;
+                    resultG += px.G;
+                    resultB += px.B;
+                    resultH += px.GetHue();
+                    resultS += px.GetSaturation();
+                    resultL += px.GetBrightness();
+                    pointSize++;
                 }
             }
-            _avarageColor = new AvarageColor();
-            _avarageColor.R = resultR / (BoundingRect.Width * BoundingRect.Height);
-            _avarageColor.G = resultG / (BoundingRect.Width * BoundingRect.Height);
-            _avarageColor.B = resultB / (BoundingRect.Width * BoundingRect.Height);
-            _avarageColor.H = resultH / (BoundingRect.Width * BoundingRect.Height);
-            _avarageColor.S = resultS / (BoundingRect.Width * BoundingRect.Height);
-            _avarageColor.L = resultL / (BoundingRect.Width * BoundingRect.Height);
-
-            return _avarageColor;
+            _features = new Features();
+            _features.AvarageR = resultR / pointSize;
+            _features.AvarageG = resultG / pointSize;
+            _features.AvarageB = resultB / pointSize;
+            _features.AvarageH = resultH / pointSize;
+            _features.AvarageS = resultS / pointSize;
+            _features.AvarageL = resultL / pointSize;
+            _features.Size = pointSize;
+            return _features;
         }
         private Rectangle BoundingBox(IEnumerable<Point> points)
         {
@@ -150,25 +157,9 @@ namespace GraduationProject.Filters
 
             return new Rectangle(xmin, ymin, sizeX, sizeY);
         }
-        private int Decode(int index,int max)
+        private int Decode(int index, int max)
         {
             return (index * WindowsSize) > max ? max : index * WindowsSize;
-        }
-        private Rectangle findBoundingBox()
-        {
-            List<Point> points = new List<Point>();
-            
-
-            for (int i = 0; i < Image.Width; i++)
-            {
-                for (int j = 0; j < Image.Height; j++)
-                {
-                    Color mPixel = Image.GetPixel(i, j);
-                    if (mPixel.GetBrightness() > 0.45)
-                        points.Add(new Point(i, j));
-                }
-            }
-            return BoundingBox(points);
         }
     }
 }
