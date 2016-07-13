@@ -42,7 +42,9 @@ namespace GraduationProject
             Bitmap cpyImage = new Bitmap(pb1.Image);
             Graphics g = Graphics.FromImage(cpyImage);
             Pen redPen = new Pen(Color.Red, 2);
-            g.DrawRectangle(redPen, cls.getBoundingBox());
+            Rectangle bb = cls.BoundingRect;
+            AvarageColor ac = cls.AvarageColor;
+            g.DrawRectangle(redPen, bb);
             redPen.Dispose();
             g.Dispose();
             pb2.Image = cpyImage;
