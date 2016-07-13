@@ -28,33 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pb1 = new System.Windows.Forms.PictureBox();
-            this.pb2 = new System.Windows.Forms.PictureBox();
             this.openBtn = new System.Windows.Forms.Button();
-            this.processBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
+            this.lblPhotoCount = new System.Windows.Forms.Label();
+            this.btnTrain = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblProgress = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // pb1
-            // 
-            this.pb1.Location = new System.Drawing.Point(0, 0);
-            this.pb1.Name = "pb1";
-            this.pb1.Size = new System.Drawing.Size(600, 563);
-            this.pb1.TabIndex = 0;
-            this.pb1.TabStop = false;
-            // 
-            // pb2
-            // 
-            this.pb2.Location = new System.Drawing.Point(606, 0);
-            this.pb2.Name = "pb2";
-            this.pb2.Size = new System.Drawing.Size(634, 563);
-            this.pb2.TabIndex = 1;
-            this.pb2.TabStop = false;
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(0, 569);
+            this.openBtn.Location = new System.Drawing.Point(12, 12);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 2;
@@ -62,39 +45,66 @@
             this.openBtn.UseVisualStyleBackColor = true;
             this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
             // 
-            // processBtn
+            // lblPhotoCount
             // 
-            this.processBtn.Location = new System.Drawing.Point(606, 569);
-            this.processBtn.Name = "processBtn";
-            this.processBtn.Size = new System.Drawing.Size(75, 23);
-            this.processBtn.TabIndex = 3;
-            this.processBtn.Text = "Process";
-            this.processBtn.UseVisualStyleBackColor = true;
-            this.processBtn.Click += new System.EventHandler(this.processBtn_Click);
+            this.lblPhotoCount.AutoSize = true;
+            this.lblPhotoCount.Location = new System.Drawing.Point(12, 49);
+            this.lblPhotoCount.Name = "lblPhotoCount";
+            this.lblPhotoCount.Size = new System.Drawing.Size(0, 13);
+            this.lblPhotoCount.TabIndex = 4;
+            // 
+            // btnTrain
+            // 
+            this.btnTrain.Enabled = false;
+            this.btnTrain.Location = new System.Drawing.Point(128, 12);
+            this.btnTrain.Name = "btnTrain";
+            this.btnTrain.Size = new System.Drawing.Size(75, 23);
+            this.btnTrain.TabIndex = 5;
+            this.btnTrain.Text = "Train";
+            this.btnTrain.UseVisualStyleBackColor = true;
+            this.btnTrain.Click += new System.EventHandler(this.btnTrain_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 121);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(191, 23);
+            this.progressBar1.TabIndex = 6;
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.AutoSize = true;
+            this.lblProgress.Location = new System.Drawing.Point(94, 105);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(24, 13);
+            this.lblProgress.TabIndex = 7;
+            this.lblProgress.Text = "0/0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 623);
-            this.Controls.Add(this.processBtn);
+            this.ClientSize = new System.Drawing.Size(220, 155);
+            this.Controls.Add(this.lblProgress);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.btnTrain);
+            this.Controls.Add(this.lblPhotoCount);
             this.Controls.Add(this.openBtn);
-            this.Controls.Add(this.pb2);
-            this.Controls.Add(this.pb1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pb1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Train Images";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pb1;
-        private System.Windows.Forms.PictureBox pb2;
         private System.Windows.Forms.Button openBtn;
-        private System.Windows.Forms.Button processBtn;
+        private System.Windows.Forms.Label lblPhotoCount;
+        private System.Windows.Forms.Button btnTrain;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblProgress;
     }
 }
 
