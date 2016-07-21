@@ -37,7 +37,7 @@ namespace GraduationProject.Filters
 
         public void Save(string name)
         {
-            File.AppendAllText("./training.txt",AvarageR+";"+AvarageG+";"+AvarageB+";"+AvarageH+";"+AvarageS+";"+AvarageL+";"+Size+";"+name+Environment.NewLine);
+            File.AppendAllText("./training.txt",AvarageR.ToString().Replace(',','.')+";"+AvarageG.ToString().Replace(',', '.') + ";"+AvarageB.ToString().Replace(',', '.') + ";"+AvarageH.ToString().Replace(',', '.') + ";"+AvarageS.ToString().Replace(',', '.') + ";"+AvarageL.ToString().Replace(',', '.') + ";"+Size.ToString().Replace(',', '.') + ";"+name+Environment.NewLine);
         }
     }
 }
