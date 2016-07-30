@@ -40,3 +40,4 @@ C:\Users\PinneraMac\Desktop\Projects\graduationproject\GraduationProject\obj\Deb
 C:\Users\PinneraMac\Desktop\Projects\graduationproject\GraduationProject\obj\Debug\GraduationProject.Form1.resources
 C:\Users\PinneraMac\Desktop\Projects\graduationproject\GraduationProject\obj\Debug\GraduationProject.Properties.Resources.resources
 C:\Users\PinneraMac\Desktop\Projects\graduationproject\GraduationProject\obj\Debug\GraduationProject.csproj.GenerateResource.Cache
+C:\Users\halim\Projects\GraduationProject\GraduationProject\GraduationProject\obj\Debug\GraduationProject.ImageForm.resources
